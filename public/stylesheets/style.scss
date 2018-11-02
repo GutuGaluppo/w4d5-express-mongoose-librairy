@@ -1,0 +1,17 @@
+$main-color: #00B7FF;
+
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: $main-color;
+}
+
+.container {
+  margin: 10px;
+  h1 {
+    color: white;
+  }
+}
