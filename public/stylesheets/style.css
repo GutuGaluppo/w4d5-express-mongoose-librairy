@@ -1,5 +1,5 @@
 body {
-  padding: 50px;
+  padding: 10px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; }
 
 a {
@@ -9,5 +9,11 @@ a {
   margin: 10px; }
   .container h1 {
     color: white; }
+
+.alert-red {
+  background: red;
+  color: white;
+  padding: 3px;
+  margin: 10px 0; }
 
 /*# sourceMappingURL=style.css.map */
