@@ -1,0 +1,15 @@
+<h1>Edit book</h1>
+
+{{#if error}}
+<div class="alert-red">
+  {{error}}
+</div>
+{{/if}}
+
+<form action="/books/{{book._id}}/edit" method="post">
+  Title: <input value="{{book.title}}" type="text" name="title"> <br>
+  Description: <input value="{{book.description}}" type="text" name="description"><br>
+  Author: <input value="{{book.author}}" type="text" name="author"><br>
+  Rating: <input value="{{book.rating}}" type="number" name="rating"><br>
+  <button type="submit">Update book</button>
+</form>

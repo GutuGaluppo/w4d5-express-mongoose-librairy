@@ -67,4 +67,27 @@ router.post('/add-book', (req, res, next) => {
     })
 })
 
+// Page to display the edit form
+router.get('/books/:id/edit', (req, res, next) => {
+  Book.findById(req.params.id)
+    .then(book => {
+      res.render('edit-book', { book })
+    })
+})
+
+// Route to handle the edit form submission
+router.post('/books/:id/edit', (req, res, next) => {
+  // Find the book and update it with the info from the form
+  Book.findByIdAndUpdate(req.params.id, {
+    title: req.body.title,
+    description: req.body.description,
+    author: req.body.author,
+    rating: req.body.rating,
+  })
+    .then(book => {
+      res.redirect('/books/' + book._id)
+    })
+})
+
+
 module.exports = router;
