@@ -1,5 +1,6 @@
 const express = require('express');
 const Book = require('../models/book')
+const Publisher = require('../models/publisher')
 
 const router = express.Router();
 
@@ -30,6 +31,7 @@ router.get('/books', (req, res, next) => {
 router.get('/books/:id', (req, res, next) => {
   let id = req.params.id // the id from the url
   Book.findById(id)
+    .populate('_publisher') // change the field "_publisher" by the full document
     .then(bookFromDb => {
       res.render('book-detail', {
         book: bookFromDb
@@ -42,7 +44,13 @@ router.get('/books/:id', (req, res, next) => {
 
 // The route to display the form
 router.get('/add-book', (req, res, next) => {
-  res.render('add-book')
+  // // The simple render without the publishers
+  // res.render('add-book')
+
+  Publisher.find({}, null, { sort: { name: 1 } })
+    .then(publishers => {
+      res.render('add-book', { publishers })
+    })
 })
 
 // The route to handle the form
@@ -61,6 +69,7 @@ router.post('/add-book', (req, res, next) => {
     description: req.body.description,
     author: req.body.author,
     rating: req.body.rating,
+    _publisher: req.body._publisher,
   })
     .then(book => {
       res.redirect('/books/' + book._id)
@@ -71,7 +80,10 @@ router.post('/add-book', (req, res, next) => {
 router.get('/books/:id/edit', (req, res, next) => {
   Book.findById(req.params.id)
     .then(book => {
-      res.render('edit-book', { book })
+      Publisher.find({}, null, { sort: { name: 1 } })
+        .then(publishers => {
+          res.render('edit-book', { book, publishers })
+        })
     })
 })
 
@@ -83,9 +95,17 @@ router.post('/books/:id/edit', (req, res, next) => {
     description: req.body.description,
     author: req.body.author,
     rating: req.body.rating,
+    _publisher: req.body._publisher,
   })
     .then(book => {
       res.redirect('/books/' + book._id)
+    })
+})
+
+router.get('/books/:id/delete', (req, res, next) => {
+  Book.findByIdAndRemove(req.params.id)
+    .then(book => {
+      res.redirect('/books')
     })
 })
 

@@ -6,7 +6,10 @@
     <a href="/books/{{this._id}}">
       {{this.title}}
     </a>
-    (<a href="/books/{{this._id}}/edit">Edit</a>)
+    (
+    <a href="/books/{{this._id}}/edit">Edit</a>,
+    <a href="/books/{{this._id}}/delete">Delete</a>
+    )
   </li>
   {{/each}}
 </ul>

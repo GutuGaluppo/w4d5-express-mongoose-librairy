@@ -11,5 +11,12 @@
   Description: <input type="text" name="description"><br>
   Author: <input type="text" name="author"><br>
   Rating: <input type="number" name="rating"><br>
+  Publisher:
+  <select name="_publisher">
+    {{#each publishers}}
+    {{!-- req.body will be the id of the publisher --}}
+    <option value="{{this._id}}">{{this.name}}</option>
+    {{/each}}
+  </select> <br>
   <button type="submit">Create book</button>
 </form>

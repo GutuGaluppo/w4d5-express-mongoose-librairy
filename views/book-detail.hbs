@@ -1,7 +1,11 @@
 <h1>{{book.title}}</h1>
 
-Author: {{book.author}}
+<strong>Author</strong>: {{book.author}} <br>
+<strong>Description</strong>: {{book.description}} <br>
+<strong>Rating</strong>: {{book.rating}} <br>
+<strong>Publisher</strong>: {{book._publisher.name}} <br>
 
 <p>
-  <a href="/books/{{book._id}}/edit">Edit</a>
+  <a href="/books/{{book._id}}/edit">Edit</a><br>
+  <a href="/books/{{book._id}}/delete">Delete</a><br>
 </p>

@@ -3,6 +3,7 @@
 
 const mongoose = require('mongoose');
 const Book = require('../models/book');
+const Publisher = require('../models/publisher');
 
 const dbName = 'awesome-project';
 mongoose.connect(`mongodb://localhost/${dbName}`);
@@ -70,9 +71,35 @@ const books = [
   }
 ]
 
+const publishers = [
+  {
+    name: "Penguin Publisher",
+    website: "https://penguin.com",
+  },
+  {
+    name: "Random House",
+    website: "https://random-house.com",
+  },
+  {
+    name: "Ironpublisher",
+    website: "https://ironpublisher.com",
+  },
+]
+
 // Save in the database all the books from the array "books"
-Book.create(books, (err) => {
-  if (err) { throw (err) }
-  console.log(`Created ${books.length} books`)
-  mongoose.connection.close()
-});
+// Book.create(books, (err) => {
+//   if (err) { throw (err) }
+//   console.log(`Created ${books.length} books`)
+//   mongoose.connection.close()
+// });
+
+Publisher.create(publishers)
+  .then(publishers =>
+    console.log(`Created ${publishers.length} publishers`)
+  )
+
+
+// If we want to seed publishers and books at the same time and link them
+// 1) Publisher.create(publishers)
+// 2) // books[i]._publisher is equal to an id (inside Publisher.create)
+// 3) Book.create(books) // (inside Publisher.create)

@@ -6,7 +6,9 @@ const bookSchema = new Schema({
   title: String,
   description: String,
   author: String,
-  rating: Number
+  rating: Number,
+  // The reference to the Publisher model
+  _publisher: { type: Schema.Types.ObjectId, ref: 'Publisher' }
 }, {
     timestamps: {
       createdAt: "created_at",
